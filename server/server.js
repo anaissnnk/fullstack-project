@@ -1,47 +1,49 @@
-// //IMPORT MARIADB
+//IMPORT
 import mariadb from 'mariadb'
-import * as dotenv from 'dotenv'
-import cors from 'cors'
+import { config } from "dotenv";config();
 import express from "express";
-dotenv.config()
+import cors from 'cors'
+config();
 
+
+//VARIABLES
+const PORT = process.env.PORT || 8000;
+const HOST = process.env.HOST || "localhost";
+const server = express();
+
+//SERVER USE
+server.use(cors());
+server.use(express.json());
+
+//POOL
 const pool = mariadb.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     connectionLimit: 5
 })
 
-//IMPORT EXPRESS AND USE APP
-const server = express();
-
-server.use(cors());
-server.use(express.json());
-/*url encoded*/
-
-server.listen(8000, () => {
-    console.log("Listening on http://localhost:8000")
-});
-
-//SERVER ROUTE
-server.get("/", (req, res) => {
-    res.send({status:200, msg:"This is the root"})
+//ROOT
+server.get("/", async (req, res) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        const data = await connection.query(
+            "SELECT * FROM ideas");
+        console.log(data);
+        res.json(data);
+    } catch(err) {
+        throw err;
+    } finally {
+        if (connection) connection.end();
+    }
 })
 
-//CONNECTION BETWEEN BACKEND AND FRONTEND
-server.get("/show-all", async (req, res) => {
-    (async () => {
-        let connection;
-        try {
-            connection = await pool.getConnection();
-            const data = await connection.query(`SELECT * FROM brilliant_minds.ideas`);
-            console.log(data);
-            res.json(data);
-        } catch(err) {
-            throw err;
-        } finally {
-            if (connection) connection.end();
-        }
-    })()
+//LISTEN
+server.listen(PORT, () => {
+    console.log(`Listening on http://${HOST}:${PORT}`);
 })
+
+
 
