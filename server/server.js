@@ -1,6 +1,8 @@
 // //IMPORT MARIADB
 import mariadb from 'mariadb'
 import * as dotenv from 'dotenv'
+import cors from 'cors'
+import express from "express";
 dotenv.config()
 
 const pool = mariadb.createPool({
@@ -11,9 +13,10 @@ const pool = mariadb.createPool({
 })
 
 //IMPORT EXPRESS AND USE APP
-import express from "express";
 const server = express();
-// app.use(express.json());
+
+server.use(cors());
+server.use(express.json());
 /*url encoded*/
 
 server.listen(8000, () => {
@@ -32,13 +35,13 @@ server.get("/show-all", async (req, res) => {
         try {
             connection = await pool.getConnection();
             const data = await connection.query(`SELECT * FROM brilliant_minds.ideas`);
-            console.log(data)
+            console.log(data);
+            res.json(data);
         } catch(err) {
             throw err;
         } finally {
             if (connection) connection.end();
         }
     })()
-    //add other response
 })
 
