@@ -26,14 +26,17 @@
 
 //IMPORT EXPRESS
 import express from "express";
-const PORT = process.env.PORT
 
 //APP
 const app = express();
-app.use(express.json());
-
+// app.use(express.json());
 /*url encoded*/
 
-app.listen(PORT, () => {
-    console.log("Listening on http://localhost:8000");
+app.listen(8000, () => {
+    console.log("Listening on http://localhost:8000")
+});
+
+//SERVER ROUTE
+app.get("/", (req, res) => {
+    res.send({status:200, msg:"This is the root"})
 })
