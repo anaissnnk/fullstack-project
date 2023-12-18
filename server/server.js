@@ -5,7 +5,6 @@ import express from "express";
 import cors from 'cors'
 config();
 
-
 //VARIABLES
 const PORT = process.env.PORT || 8000;
 const HOST = process.env.HOST || "localhost";
@@ -24,7 +23,7 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
-//ROOT
+//ROOT - LANDING
 app.get("/", async (req, res) => {
     let connection;
     try {
@@ -39,10 +38,18 @@ app.get("/", async (req, res) => {
     }
 })
 
+//CREATE PAGE
+app.get("/create", (req, res) => {
+    console.log("this is the landing page")
+})
+
+//DELETE PAGE
+app.get("/delete", (req, res) => {
+    console.log("this is the delete page")
+})
+
 //LISTEN
 app.listen(PORT, () => {
     console.log(`Listening on http://${HOST}:${PORT}`);
 })
-
-
 
