@@ -9,11 +9,11 @@ config();
 //VARIABLES
 const PORT = process.env.PORT || 8000;
 const HOST = process.env.HOST || "localhost";
-const server = express();
+const app = express();
 
 //SERVER USE
-server.use(cors());
-server.use(express.json());
+app.use(cors());
+app.use(express.json());
 
 //POOL
 const pool = mariadb.createPool({
@@ -25,13 +25,12 @@ const pool = mariadb.createPool({
 })
 
 //ROOT
-server.get("/", async (req, res) => {
+app.get("/", async (req, res) => {
     let connection;
     try {
         connection = await pool.getConnection();
         const data = await connection.query(
             "SELECT * FROM ideas");
-        console.log(data);
         res.json(data);
     } catch(err) {
         throw err;
@@ -41,7 +40,7 @@ server.get("/", async (req, res) => {
 })
 
 //LISTEN
-server.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Listening on http://${HOST}:${PORT}`);
 })
 
