@@ -10,32 +10,35 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
-const connectTable = async () => {
-    let connection;
-    try {
-        connection = await pool.getConnection();
-        const data = await connection.query(`SELECT * FROM brilliant_minds.ideas`);
-        console.log(data)
-    } catch(err) {
-        throw err;
-    } finally {
-        if (connection) connection.end();
-    }
-}
-
 //IMPORT EXPRESS AND USE APP
 import express from "express";
-const app = express();
+const server = express();
 // app.use(express.json());
 /*url encoded*/
 
-app.listen(8000, () => {
+server.listen(8000, () => {
     console.log("Listening on http://localhost:8000")
 });
 
 //SERVER ROUTE
-app.get("/", (req, res) => {
-    // res.send({status:200, msg:"This is the root"})
-    connectTable();
+server.get("/", (req, res) => {
+    res.send({status:200, msg:"This is the root"})
+})
+
+//CONNECTION BETWEEN BACKEND AND FRONTEND
+server.get("/show-all", async (req, res) => {
+    (async () => {
+        let connection;
+        try {
+            connection = await pool.getConnection();
+            const data = await connection.query(`SELECT * FROM brilliant_minds.ideas`);
+            console.log(data)
+        } catch(err) {
+            throw err;
+        } finally {
+            if (connection) connection.end();
+        }
+    })()
+    //add other response
 })
 
