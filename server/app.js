@@ -6,22 +6,9 @@ import express from "express";
 import cors from 'cors'
 
 //VARIABLES
+const app = express();
 const PORT = process.env.PORT || 8000;
 const HOST = process.env.HOST || "localhost";
-const app = express();
-
-//USE MODULES
-app.use(cors());
-app.use(express.json());
-
-//ROUTER
-import generateRouter from './routes.js';
-const routes = ['create', 'delete', 'landing'];
-
-routes.forEach(route => {
-    const router = generateRouter(route);
-    app.use(`/${route}`, router);
-});
 
 //POOL
 const pool = mariadb.createPool({
@@ -32,25 +19,33 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
-//ROOT
+//USE MODULES
+app.use(cors());
+app.use(express.json());
+
+//ROUTER
+import generateRouter from './routes/routes.js';
+const routes = ['create', 'delete', 'landing'];
+
+routes.forEach(route => {
+    const router = generateRouter(route);
+    app.get(`/${route}`, router);
+});
+
 app.get("/", async (req, res) => {
     let connection;
     try {
-        connection = await pool.getConnection();
+        connection = await pool.getConnection()
         const data = await connection.query(
-            "SELECT * FROM ideas");
-        res.json(data);
-    } catch(err) {
-        throw err;
+            "SELECT * FROM ideas;"
+        )
+        res.send(data)
+    } catch (error) {
+        throw error
     } finally {
-        if (connection) connection.end();
+        if (connection) connection.end()
     }
 })
-
-//ROUTES
-app.use('/', createRouter);
-app.use('/', deleteRouter);
-app.use('/', landingRouter);
 
 //LISTEN
 app.listen(PORT, () => {
