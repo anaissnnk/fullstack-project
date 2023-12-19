@@ -32,9 +32,20 @@ routes.forEach(route => {
     app.get(`/${route}`, router);
 });
 
-//ROOT
-app.get("/", (req, res) => {
-    res.send("This is the root")
+//SHOW TABLE DATA ON ROOT
+app.get("/", async (req, res) => {
+    let connection;
+    try {
+        connection = await pool.getConnection()
+        const data = await connection.query(
+            "SELECT * FROM ideas;"
+        )
+        res.send(data)
+    } catch (error) {
+        throw error
+    } finally {
+        if (connection) connection.end()
+    }
 })
 
 //LISTEN
