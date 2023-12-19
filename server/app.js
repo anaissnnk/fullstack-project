@@ -1,18 +1,21 @@
-//MODULES
+//IMPORT
 import mariadb from 'mariadb'
+
 import { config } from "dotenv";
 config();
+
 import express from "express";
-import cors from 'cors'
+import cors from 'cors';
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 //VARIABLES
-const app = express();
 const PORT = process.env.PORT || 8000;
 const HOST = process.env.HOST || "localhost";
-
-//MIDDLEWARES
-app.use(cors());
-app.use(express.json());
 
 //POOL
 const pool = mariadb.createPool({
@@ -23,7 +26,7 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 })
 
-//ROUTER
+//CREATE ROUTES
 import generateRouter from './routes/routes.js';
 const routes = ['create', 'delete', 'landing'];
 
@@ -32,7 +35,7 @@ routes.forEach(route => {
     app.get(`/${route}`, router);
 });
 
-//SHOW TABLE DATA ON ROOT
+//SHOW TABLE DATA ON ROOT LEVEL
 app.get("/", async (req, res) => {
     let connection;
     try {
@@ -46,6 +49,11 @@ app.get("/", async (req, res) => {
     } finally {
         if (connection) connection.end()
     }
+})
+
+//CREATE NEW TODO
+app.post('/create', function(req, res) {
+    console.log(req.body)
 })
 
 //LISTEN
