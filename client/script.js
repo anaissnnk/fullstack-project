@@ -7,7 +7,7 @@
 
     toDoList.forEach(todo => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${todo.id}: ${todo.title}: ${todo.description}`
+        listItem.textContent = `${todo.id}: ${todo.title}: ${todo.description}`;
         toDoSection.appendChild(listItem);
     });
 })();
