@@ -9,6 +9,12 @@
         const listItem = document.createElement('li');
         listItem.textContent = `${todo.id}: ${todo.title}: ${todo.description}`;
         toDoSection.appendChild(listItem);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.type = "submit";
+        deleteButton.textContent = "Delete";
+        toDoSection.appendChild(deleteButton);
+
     });
 })();
 
