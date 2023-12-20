@@ -13,9 +13,21 @@
         const deleteButton = document.createElement('button');
         deleteButton.id = idea.id
         deleteButton.type = "submit";
+        deleteButton.className = "delete-button";
         deleteButton.textContent = "Delete";
         ideaSection.appendChild(deleteButton);
     });
 })();
 
+// //DELETE DATA
+// const deleteButton = document.getElementsByClassName("delete-button");
+// const buttonsArray = Array.from(deleteButton);
 
+// buttonsArray.forEach(button => {
+//     button.addEventListener("click", async() => {
+//         await pool.getConnection();
+//         const removeIdea = await connect.query(
+//             "DELETE FROM ideas WHERE id=?"
+//         )
+//     })
+// })
