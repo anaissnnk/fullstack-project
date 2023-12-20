@@ -10,12 +10,11 @@
         listItem.textContent = `${idea.id}: ${idea.title}: ${idea.description}`;
         ideaSection.appendChild(listItem);
 
-        
         const deleteButton = document.createElement('button');
         deleteButton.id = idea.id
         deleteButton.type = "submit";
         deleteButton.textContent = "Delete";
-        toDoSection.appendChild(deleteButton);
+        ideaSection.appendChild(deleteButton);
     });
 })();
 
