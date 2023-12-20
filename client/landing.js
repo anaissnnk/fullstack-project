@@ -1,4 +1,4 @@
-//FETCH DATA 
+//DYNAMIC DATA CREATION AND FETCHING 
 (async () => {
     const response = await fetch('http://localhost:8000/');
     const ideaList = await response.json();
@@ -16,44 +16,33 @@
         deleteButton.className = "delete-button";
         deleteButton.textContent = "Delete";
         ideaSection.appendChild(deleteButton);
+
+        const deleteButtons = document.getElementsByClassName("delete-button");
+        const buttonsArray = Array.from(deleteButtons);
+        
+        buttonsArray.forEach(button => {
+            button.addEventListener("click", async (req, res) => {
+                try {
+                    const id = button.id;
+                    const response = await fetch(`http://localhost:8000/delete/${id}`, {
+                        method: "DELETE",
+                        mode: "cors",
+                        headers: {
+                            "Content-Type": "application/json",
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                          },
+                        body: JSON.stringify({ id: id })
+                    });
+                    if (response.ok) {
+                        console.log('Item deleted successfully!');
+                        location.reload();
+                    } else {
+                        console.error('Failed to delete item.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
     });
 })();
-
-//DELETE DATA
-const deleteButton = document.getElementsByClassName("delete-button");
-const buttonsArray = Array.from(deleteButton);
-
-buttonsArray.forEach(button => {
-    button.addEventListener("click", async() => {
-        await pool.getConnection();
-        const removeIdea = await connect.query(
-            "DELETE FROM ideas WHERE id=?"
-        )
-    })
-})
-
-// // Assuming you have a collection of delete buttons
-// const deleteButtons = document.querySelectorAll('.delete-button');
-
-// deleteButtons.forEach(button => {
-//     button.addEventListener('click', async () => {
-//         try {
-//             const id = button.id;
-//             const response = await fetch(`http://localhost:8000/delete/${id}`, {
-//                 method: 'DELETE'
-//             });
-            
-//             if (response.ok) {
-//                 console.log('Item deleted successfully!');
-//                 const removeIdea = await connect.query(
-//                     "DELETE FROM ideas WHRE id=?"
-//                 )
-//             } else {
-//                 console.error('Failed to delete item.');
-//             }
-//         } catch (error) {
-//             console.error('Error:', error);
-//         }
-//     });
-// });
-
