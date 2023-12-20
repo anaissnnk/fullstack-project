@@ -1,20 +1,21 @@
 //FETCH DATA 
 (async () => {
     const response = await fetch('http://localhost:8000/');
-    const toDoList = await response.json();
+    const ideaList = await response.json();
 
-    const toDoSection = document.querySelector('.to-do-list');
+    const ideaSection = document.querySelector('.idea-list');
 
-    toDoList.forEach(todo => {
+    ideaList.forEach(idea => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${todo.id}: ${todo.title}: ${todo.description}`;
-        toDoSection.appendChild(listItem);
+        listItem.textContent = `${idea.id}: ${idea.title}: ${idea.description}`;
+        ideaSection.appendChild(listItem);
 
+        
         const deleteButton = document.createElement('button');
+        deleteButton.id = idea.id
         deleteButton.type = "submit";
         deleteButton.textContent = "Delete";
         toDoSection.appendChild(deleteButton);
-
     });
 })();
 
