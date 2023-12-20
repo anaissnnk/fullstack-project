@@ -1,4 +1,4 @@
-//FETCH AND INJECT DATA 
+//FETCH DATA 
 (async () => {
     const response = await fetch('http://localhost:8000/');
     const toDoList = await response.json();
