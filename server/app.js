@@ -10,8 +10,12 @@ import cors from 'cors';
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.urlencoded({
+    extended: false,
+    limit: 10000,
+    parameterLimit: 2,
+}));
 
 //VARIABLES
 const PORT = process.env.PORT || 8000;
@@ -51,10 +55,30 @@ app.get("/", async (req, res) => {
     }
 })
 
-//CREATE NEW TODO
-app.post('/create', function(req, res) {
-    console.log(req.body)
-})
+app.post('/create', async (req, res) => {
+    let connection;
+    try {
+        const { newIdeaTitle, newIdeaDescription } = req.body;
+
+        if (!newIdeaTitle || newIdeaTitle.trim() === '' || !newIdeaDescription || newIdeaDescription.trim() === '') {
+            return res.status(400).send("Title and Description are required.");
+        }
+
+        connection = await pool.getConnection();
+
+        const insertNewIdea = await connection.query(
+            "INSERT INTO ideas (title, description) VALUES (?, ?)",
+            [newIdeaTitle, newIdeaDescription]
+        );
+
+        connection.release();
+
+        res.send("New idea added successfully!");
+    } catch (error) {
+        throw error;
+    }
+});
+
 
 //LISTEN
 app.listen(PORT, () => {
