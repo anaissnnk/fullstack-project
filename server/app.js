@@ -55,6 +55,7 @@ app.get("/", async (req, res) => {
     }
 })
 
+//ADD IDEA
 app.post('/create', async (req, res) => {
     let connection;
     try {
@@ -73,11 +74,51 @@ app.post('/create', async (req, res) => {
 
         connection.release();
 
-        res.send("New idea added successfully!");
+        // res.send("New idea added successfully!");
+        res.redirect("http://127.0.0.1:5500/client/landing.html")
     } catch (error) {
         throw error;
     }
 });
+
+// DELETE IDEA
+app.delete("/delete/:id", (req, res) => {
+    try {
+        const deleteID = req.params.id;
+        con.query(
+            `DELETE FROM ideas WHERE id=?`, [deleteID],
+            (error, result) => {
+                if (error) {
+                    console.error(error);
+                } else {
+                    res.send("Deleted!");
+                }
+            }
+        );
+    } catch (error) {
+        throw error;
+    }
+});
+
+
+// // Assuming you're using Express for the server setup
+// app.delete("/delete/:id", async (req, res) => {
+//     try {
+//         const deleteID = req.params.id;
+//         const connection = await pool.getConnection();
+//         const result = await connection.query(
+//             "DELETE FROM ideas WHERE id = ?",
+//             [deleteID]
+//         );
+//         connection.release();
+
+//         res.send("Deleted!");
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send("Error deleting item.");
+//     }
+// });
+
 
 
 //LISTEN
