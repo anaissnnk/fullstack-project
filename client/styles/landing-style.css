@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+}
+
+body {
+    background-color: rgb(255, 234, 245);
+    background-image:
+    linear-gradient(rgb(240, 161, 194) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(240, 161, 194) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+.index-header {
+    background-color: rgb(246, 234, 255);
+    padding: 1ch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+}
+
+.index-header img {
+    max-width: 15%;
+}
+
+.index-header span {
+    max-width: 40%;
+    margin: auto;
+    padding: 1ch;
+    border: rgb(236, 216, 255) solid;
+    border-radius: 20px;
+    background-color: rgb(236, 216, 255);
+}
+
+.index-nav {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 1ch;
+}
+
+.index-nav a {
+    max-width: 30%;
+    background-color: rgb(233, 107, 158);
+    padding: 1ch;
+    border: 3px solid rgb(221, 34, 109);
+    border-radius: 10px;
+    color: white;
+}
+
+.index-nav a:hover {
+    cursor: pointer;
+    background-color: rgb(221, 34, 109);
+}
+
+.idea-section {
+    max-width: 70%;
+    margin: 1ch auto;
+    background-color: lightpink;
+    text-align: right;
+    border: 3px solid lightpink;
+    border-radius: 10px;
+}
+
+.idea-card {
+    background-color: white;
+    margin: 1ch;
+    padding: 1ch;
+    text-align: justify;
+    border: 3px solid lightpink;
+    border-radius: 10px;
+}
+
+.idea-card h2 {
+    font-family: 'Courier New';
+    font-size: large;
+
+}
+
+.delete-button {
+    background-color: rgb(255, 227, 231);
+    width: 15%;
+    margin: 1ch;
+    border: 3px solid rgb(245, 171, 182);
+    border-radius: 5px;
+    color: rgb(235, 88, 110);
+}
+
+.delete-button:hover {
+    cursor: pointer;
+    background-color: rgb(235, 88, 110);
+    color: rgb(255, 229, 233);
+    border: 3px solid rgb(235, 88, 110);
+}
+
+.index-footer {
+    background-color: rgb(222, 160, 221);
+    text-align: center;
+}
+
