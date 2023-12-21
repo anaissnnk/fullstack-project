@@ -69,7 +69,7 @@ app.post('/create', async (req, res) => {
             [newIdeaTitle, newIdeaDescription]
         );
         connection.release();
-        res.redirect("http://127.0.0.1:5500/client/landing.html")
+        res.redirect("http://127.0.0.1:5500/client/index.html")
     } catch (error) {
         throw error;
     }
