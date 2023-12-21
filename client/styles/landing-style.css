@@ -61,9 +61,9 @@ body {
 .idea-section {
     max-width: 70%;
     margin: 1ch auto;
-    background-color: lightpink;
+    background-color: rgb(255, 206, 213);
     text-align: right;
-    border: 3px solid lightpink;
+    border: 3px solid rgb(255, 206, 213);
     border-radius: 10px;
 }
 
@@ -72,7 +72,6 @@ body {
     margin: 1ch;
     padding: 1ch;
     text-align: justify;
-    border: 3px solid lightpink;
     border-radius: 10px;
 }
 
