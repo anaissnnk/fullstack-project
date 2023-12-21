@@ -103,8 +103,9 @@ input:focus {
     border: 3px solid rgb(235, 88, 110);
 }
 
-.create-footer {
+/* .create-footer {
+    margin-top: auto;
     background-color: rgb(222, 160, 221);
     text-align: center;
-}
+} */
 
