@@ -3,27 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/create-style.css">
     <title>Document</title>
 </head>
 <body>
 
-    <nav>
-        <a href="./landing.html">Go back to landing page</a>
+    <header class="create-header">
+        <img src="./header-img/froggy.gif" alt="pixel gif of a frog standing on lotus">
+        <span>
+            This frog's eyes can see through your soul and read your lies.
+            She's not one to be triffled with, and murder is but one of the numerous atrocities she has commited.<br>
+            <br>She'll watch over and make sure you're not sending weird requests.
+        </span>
+    </header>
+    <nav class="create-nav">
+        <a href="./index.html">Go back to landing page</a>
     </nav>
 
-    <form action="http://localhost:8000/create" enctype="application/x-www-form-urlencoded" method="post">
+    <section class="form-section">
+        <form action="http://localhost:8000/create" enctype="application/x-www-form-urlencoded" method="post" class="create-form">
 
-        <label for="newIdeaTitle">What's your idea?</label>
-
-        <input type="text" name="newIdeaTitle">
-
-        <label for="newIdeaDescription">What is your idea about?</label>
-
-        <input type="text" name="newIdeaDescription">
-
-        <button type="submit">Submit</button>
-
-    </form>
+            <label for="newIdeaTitle">What's your idea?</label>
     
+            <input type="text" name="newIdeaTitle">
+    
+            <label for="newIdeaDescription">What is your idea about?</label>
+    
+            <input type="text" name="newIdeaDescription">
+    
+            <button type="submit" class="submit-button">Submit</button>
+    
+        </form>
+    </section>
+
+    <footer class="create-footer">
+        <p>
+            Fun fact: This frog was drawn using Piskel.
+        </p>
+    </footer>
 </body>
 </html>

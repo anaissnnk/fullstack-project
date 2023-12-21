@@ -13,7 +13,7 @@ body {
     min-height: 100vh;
 }
 
-.index-header {
+.create-header {
     background-color: rgb(246, 234, 255);
     padding: 1ch;
     display: flex;
@@ -22,11 +22,11 @@ body {
     text-align: justify;
 }
 
-.index-header img {
+.create-header img {
     max-width: 15%;
 }
 
-.index-header span {
+.create-header span {
     max-width: 40%;
     margin: auto;
     padding: 1ch;
@@ -35,7 +35,7 @@ body {
     background-color: rgb(236, 216, 255);
 }
 
-.index-nav {
+.create-nav {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -44,7 +44,7 @@ body {
     margin: 1ch;
 }
 
-.index-nav a {
+.create-nav a {
     max-width: 30%;
     background-color: rgb(233, 107, 158);
     padding: 1ch;
@@ -53,36 +53,41 @@ body {
     color: white;
 }
 
-.index-nav a:hover {
+.create-nav a:hover {
     cursor: pointer;
     background-color: rgb(221, 34, 109);
 }
 
-.idea-section {
+.form-section {
     max-width: 70%;
     margin: 1ch auto;
     background-color: lightpink;
-    text-align: right;
-    border: 3px solid lightpink;
+    border: 2px solid lightpink;
     border-radius: 10px;
 }
 
-.idea-card {
+.create-form {
     background-color: white;
     margin: 1ch;
     padding: 1ch;
-    text-align: justify;
-    border: 3px solid lightpink;
+    border: 1px solid lightpink;
     border-radius: 10px;
 }
 
-.idea-card h2 {
-    font-family: 'Courier New';
-    font-size: large;
-
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    box-sizing: border-box;
 }
 
-.delete-button {
+input:focus {
+    border: 3px solid #ffd5ef;
+    transition: 0.5s;
+    outline: none;
+  }
+
+.submit-button {
     background-color: rgb(255, 227, 231);
     width: 15%;
     margin: 1ch;
@@ -91,14 +96,14 @@ body {
     color: rgb(235, 88, 110);
 }
 
-.delete-button:hover {
+.submit-button:hover {
     cursor: pointer;
     background-color: rgb(235, 88, 110);
     color: rgb(255, 229, 233);
     border: 3px solid rgb(235, 88, 110);
 }
 
-.index-footer {
+.create-footer {
     background-color: rgb(222, 160, 221);
     text-align: center;
 }
