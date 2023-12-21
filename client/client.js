@@ -7,6 +7,7 @@
     ideaList.forEach(idea => {
         // listItem.textContent = `${idea.id}: ${idea.title}: ${idea.description}`;
         const ideaCard = document.createElement('section');
+        ideaCard.className = ("idea-card");
         ideaSection.appendChild(ideaCard);
 
         const ideaNameAndID = document.createElement('h2');
